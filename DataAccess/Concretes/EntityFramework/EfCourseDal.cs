@@ -27,7 +27,7 @@ namespace DataAccess.Concretes.EntityFramework
                              {
                                  CourseId = c.Id,
                                  CourseName = c.CourseName,
-                                 CategoryName = cat.Name,
+                                 CategoryName = cat.CategoryName,
                                  CoursePrice = c.CoursePrice,
                                 
                              };

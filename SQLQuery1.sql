@@ -10,7 +10,7 @@ Email varchar(250),
 Password varchar(250)
 )
 
-drop table Employees,Instructors
+
 create table Categories(
 Id int primary Key identity(1,1),
 Name varchar(200),
@@ -44,7 +44,7 @@ StatusId int foreign key references Status(Id),
 CourseName varchar(200),
 CoursePrice int
 )
-drop table Courses
+
 
 
 insert into Categories values ('Programming')
@@ -52,7 +52,7 @@ insert into Instructors values ('Denizhan')
 insert into Instructors values ('İrem')
 insert into Instructors values ('Engin')
 insert into Status values ('Active','States that this row is active')
-insert into Status values ('Deactive','States that this row is active')
+insert into Status values ('Deactive','States that this row is deactive')
 insert into Courses values (1,1,1,'C#',65)
 insert into Courses values (1,2,1,'Java',65)
 insert into Courses values (1,3,1,'Python',65)

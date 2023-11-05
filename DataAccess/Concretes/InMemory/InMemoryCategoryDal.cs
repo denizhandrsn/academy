@@ -16,12 +16,7 @@ namespace DataAccess.Concretes.InMemory
 
         public InMemoryCategoryDal()
         {
-            _categories = new List<Category>
-            {
-                new Category{Id = 1,Name = "Programlama"},
-                new Category{Id = 2,Name = "Analiz"},
-                new Category{Id = 3,Name = "Test"}
-            };
+            
         }
 
         public void Add(Category category)
@@ -56,7 +51,7 @@ namespace DataAccess.Concretes.InMemory
         { // => lambda
             Category categoryToUpdate = _categories.SingleOrDefault(c => c.Id == category.Id);
             categoryToUpdate.Id = category.Id;
-            categoryToUpdate.Name = category.Name;
+            categoryToUpdate.CategoryName = category.CategoryName;
            
         }
 
