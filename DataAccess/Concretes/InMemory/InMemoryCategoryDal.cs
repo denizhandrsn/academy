@@ -18,9 +18,9 @@ namespace DataAccess.Concretes.InMemory
         {
             _categories = new List<Category>
             {
-                new Category{Id = 1,CategoryName = "Programlama"},
-                new Category{Id = 2,CategoryName = "Analiz"},
-                new Category{Id = 3,CategoryName = "Test"}
+                new Category{Id = 1,Name = "Programlama"},
+                new Category{Id = 2,Name = "Analiz"},
+                new Category{Id = 3,Name = "Test"}
             };
         }
 
@@ -56,7 +56,7 @@ namespace DataAccess.Concretes.InMemory
         { // => lambda
             Category categoryToUpdate = _categories.SingleOrDefault(c => c.Id == category.Id);
             categoryToUpdate.Id = category.Id;
-            categoryToUpdate.CategoryName = category.CategoryName;
+            categoryToUpdate.Name = category.Name;
            
         }
 

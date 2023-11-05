@@ -12,9 +12,7 @@ namespace Entities.Concretes
     public class Category:IEntity //Bu bir veritabanı tablosudur
     {
         public int Id { get; set; }
-        public string CategoryName { get; set; }
-
-        [ForeignKey("Id")]
+        public string Name { get; set; }
         public virtual Course Course { get; set; }
     }
 }

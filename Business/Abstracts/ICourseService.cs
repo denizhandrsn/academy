@@ -1,4 +1,5 @@
 ﻿using Business.Requests.Courses;
+using Business.Responses.Courses;
 using Core.Utilities.Results;
 using Entities.Concretes;
 using Entities.DTOs;
@@ -12,7 +13,7 @@ namespace Business.Abstracts
 {
     public interface ICourseService
     {
-        IDataResult<List<Course>> GetAll();
+        IDataResult<List<ListCourseResponse>> GetAll();
         IResult Add(CreateCourseRequest request);
         
         IDataResult<List<Course>> GetAllByCategory(int categoryId);

@@ -46,12 +46,12 @@ namespace Business.Concretes
 
         
 
-        public IDataResult<List<Course>> GetAll()
+        public IDataResult<List<ListCourseResponse>> GetAll()
         {
-            List<Course> course = _courseDal.GetAll(include: b => b.Include(b => b.Instructor).Include(b => b.Category));
-            var response = _mapper.Map<ListCourseResponse>(ourse);
+            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.Instructor).Include(b => b.Category));
+            List<ListCourseResponse> responses = _mapper.Map<List<ListCourseResponse>>(courses);
 
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(), Messages.Listed);
+            return new SuccessDataResult<List<ListCourseResponse>>(responses, Messages.Listed);
         }
 
         public IDataResult<List<Course>> GetAllByCategory(int categoryId)

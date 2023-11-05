@@ -15,7 +15,5 @@ namespace Business.Responses.Courses
         public string CourseName { get; set; }
         public int CoursePrice { get; set; }
         public string CategoryName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 }
