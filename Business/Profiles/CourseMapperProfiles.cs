@@ -16,8 +16,7 @@ namespace Business.Profiles
         {
             CreateMap<CreateCourseRequest, Course>();
             CreateMap<Course, GetCourseResponse>();
-            CreateMap<Course, ListCourseResponse>().ForMember(fn => fn.FirstName, o => o.MapFrom(t => t.Instructor.User.FirstName))
-                .ForMember(ln => ln.LastName, o => o.MapFrom(t => t.Instructor.User.LastName));
+            CreateMap<Course, ListCourseResponse>();
             
             
         }
