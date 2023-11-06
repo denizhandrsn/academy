@@ -4,6 +4,7 @@ using Business.Constants;
 using Business.Requests.Courses;
 using Business.Requests.Users;
 using Business.Responses.Courses;
+using Business.Responses.Instructors;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.ValidationAspect;
 using Core.CrossCuttingConcerns.Validation;
@@ -48,7 +49,8 @@ namespace Business.Concretes
 
         public IDataResult<List<ListCourseResponse>> GetAll()
         {
-            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.Instructor).Include(b => b.Category));
+            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.Instructor.User).Include(b => b.Category));
+            
             List<ListCourseResponse> responses = _mapper.Map<List<ListCourseResponse>>(courses);
 
             return new SuccessDataResult<List<ListCourseResponse>>(responses, Messages.Listed);

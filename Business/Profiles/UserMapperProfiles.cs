@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Requests.Users;
+using Business.Responses.Users;
 using Entities.Concretes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Business.Profiles
         public UserMapperProfiles()
         {
             CreateMap<CreateUserRequest, User>();
+            CreateMap<User, ListUserResponse>();
         }
     }
 }

@@ -12,8 +12,5 @@ namespace Entities.Concretes
     {
         public int Id { get; set; }
         public string Role { get; set; }
-
-        [ForeignKey("Id")]
-        public virtual User User { get; set; }
     }
 }

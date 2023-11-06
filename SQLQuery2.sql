@@ -1,5 +1,4 @@
-﻿drop table Instructors,Courses,Users,Categories,Employees,Status
-
+﻿drop table Users, Categories,Instructors,Status,Employees,Courses
 create table Users(
 Id int identity(1,1) primary key,
 FirstName varchar(250),
@@ -13,11 +12,12 @@ Password varchar(250)
 
 create table Categories(
 Id int primary Key identity(1,1),
-Name varchar(200),
+CategoryName varchar(200),
 )
 
 create table Instructors(
-Id int primary key identity(1,1) foreign key references Users(Id),
+Id int primary key identity(1,1),
+UserId int foreign key references Users(Id),
 Name varchar(200)
 
 )
@@ -27,7 +27,8 @@ Name varchar(250),
 Description varchar(250)
 )
 create table Employees(
-Id int primary key identity(1,1) foreign key references Users(Id),
+Id int primary key identity(1,1),
+UserId int foreign key references Users(Id),
 Role varchar(250)
 )
 
@@ -44,17 +45,12 @@ CoursePrice int
 )
 
 
-insert into Users values ('Denizhan','Dursun','12345678910','2022-11-11','deniz@mail.com','123456')
-insert into Users values ('Fulden','Özsayın','12345678910','2022-11-11','fulden@mail.com','123456')
-insert into Users values ('Ali','Boztaş','12345678910','2022-11-11','ali@mail.com','123456')
+
 insert into Categories values ('Programming')
-insert into Instructors values ('Denizhan')
-insert into Instructors values ('İrem')
-insert into Instructors values ('Engin')
+insert into Users values ('Fulden','Özsyaın','12365478965','2022-11-11','deniz@mail.com','12345')
+insert into Instructors values (2,'Eğitmen')
 insert into Status values ('Active','States that this row is active')
 insert into Status values ('Deactive','States that this row is deactive')
 insert into Courses values (1,1,1,'C#',65)
 insert into Courses values (1,2,1,'Java',65)
-insert into Courses values (1,3,1,'Python',65)
-
-
+insert into Courses values (1,2,1,'Python',65)

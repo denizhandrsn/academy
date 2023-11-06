@@ -1,13 +1,12 @@
-﻿using Entities.Abstracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concretes
+namespace Business.Responses.Users
 {
-    public class User:IEntity
+    public class ListUserResponse
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -16,6 +15,5 @@ namespace Entities.Concretes
         public DateTime? DateOfBirth { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
     }
 }

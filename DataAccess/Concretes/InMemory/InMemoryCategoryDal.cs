@@ -51,7 +51,7 @@ namespace DataAccess.Concretes.InMemory
         { // => lambda
             Category categoryToUpdate = _categories.SingleOrDefault(c => c.Id == category.Id);
             categoryToUpdate.Id = category.Id;
-            categoryToUpdate.CategoryName = category.CategoryName;
+            categoryToUpdate.Name = category.Name;
            
         }
 

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
 using Business.Requests.Users;
+using Business.Responses.Courses;
+using Business.Responses.Users;
 using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -29,9 +31,13 @@ namespace Business.Concretes
             return new SuccessResult();
         }
 
-        public IDataResult<List<User>> GetAll()
+        public IDataResult<List<ListUserResponse>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll());
+            
+
+            List<User> users = _userDal.GetAll();
+            List<ListUserResponse> responses = _mapper.Map<List<ListUserResponse>>(users);
+            return new SuccessDataResult<List<ListUserResponse>>(responses);
         }
     }
 }

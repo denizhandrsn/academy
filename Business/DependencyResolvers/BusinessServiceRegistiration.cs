@@ -12,6 +12,10 @@ namespace Business.DependencyResolvers
         public static IServiceCollection AddBusinessService(this IServiceCollection services)
         {
             services.AddAutoMapper(assemblies: AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+
             return services;
         }
     }

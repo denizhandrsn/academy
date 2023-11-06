@@ -1,4 +1,5 @@
 ﻿using Business.Requests.Users;
+using Business.Responses.Users;
 using Core.Utilities.Results;
 using Entities.Concretes;
 using Entities.DTOs;
@@ -12,7 +13,7 @@ namespace Business.Abstracts
 {
     public interface IUserService
     {
-        IDataResult<List<User>> GetAll();
+        IDataResult<List<ListUserResponse>> GetAll();
         IResult Add(CreateUserRequest request);
 
     }
