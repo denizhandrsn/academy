@@ -30,5 +30,6 @@ namespace WebApi.Controllers
             var result = _courseService.Add(request);
             return StatusCode(result.Success ? 200 : 400, result);
         }
+        
     }
 }

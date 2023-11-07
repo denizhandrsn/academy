@@ -15,6 +15,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListUserResponse>> GetAll();
         IResult Add(CreateUserRequest request);
+        
 
     }
 }

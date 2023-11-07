@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Business.Abstracts;
 using Business.Constants;
 using Business.Requests.Courses;
@@ -16,6 +17,7 @@ using Entities.DTOs;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Business.Concretes
 {
@@ -70,6 +72,47 @@ namespace Business.Concretes
         public IDataResult<List<CourseDetailDto>> GetCourseDetails()
         {
             return new SuccessDataResult<List<CourseDetailDto>>(_courseDal.GetCourseDetails());
+        }
+
+        public IResult Update(UpdateCourseRequest request)
+        {
+            if (CheckIfCourseAlreadyExists(request.CourseName).Success) 
+            {
+                if (CheckIfCourseCategoryExceedsLimit(request.CategoryId).Success)
+                {
+                    Course course = _mapper.Map<Course>(request);
+                    _courseDal.Update(course);
+                    return new SuccessResult(Messages.Updated);
+                }
+                
+            }
+
+            return new ErrorResult();
+        }
+
+        private IResult CheckIfCourseAlreadyExists(string courseName)
+        {
+            var result = _courseDal.GetAll(c => c.CourseName == courseName).Any();
+            if (result)
+            {
+                return new ErrorResult();
+            }
+            else
+            {
+                return new SuccessResult();
+            }
+        }
+        private IResult CheckIfCourseCategoryExceedsLimit(int categoryId)
+        {
+            var result = _courseDal.GetAll(c => c.CategoryId == categoryId).Count();
+            if (result > 10)
+            {
+                return new ErrorResult();
+            }
+            else
+            {
+                return new SuccessResult();
+            }
         }
     }
 }
