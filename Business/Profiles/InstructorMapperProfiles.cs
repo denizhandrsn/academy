@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Business.Requests.Instructors;
 using Business.Responses.Instructors;
 using Entities.Concretes;
 using System;
@@ -14,6 +15,7 @@ namespace Business.Profiles
         public InstructorMapperProfiles()
         {
             CreateMap<Instructor, ListInstructorResponses>();
+            CreateMap<CreateInstructorRequest, Instructor>();
         }
     }
 }

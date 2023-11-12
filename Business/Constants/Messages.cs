@@ -14,6 +14,6 @@ namespace Business.Constants
 
         public static string Discounted = "İndirimli liste";
         public static string Maintanance = "Sistem Bakımda";
-        internal static string Updated;
+        public static string Updated = "Başarılı Güncelleme";
     }
 }

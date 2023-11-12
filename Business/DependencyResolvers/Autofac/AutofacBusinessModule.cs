@@ -22,7 +22,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCourseDal>().As<ICourseDal>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
-
+            builder.RegisterType<EfInstructorDal>().As<IInstructorDal>().SingleInstance();
+            builder.RegisterType<InstructorManager>().As<IInstructorService>().SingleInstance();
             
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

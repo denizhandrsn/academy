@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants;
 using Business.Requests.Users;
 using Business.Responses.Courses;
 using Business.Responses.Users;
@@ -23,12 +24,12 @@ namespace Business.Concretes
             _userDal = userDal;
             _mapper = mapper;
         }
-        public IResult Add(CreateUserRequest request)
+        public IDataResult<User> Add(CreateUserRequest request)
         {
 
             User user = _mapper.Map<User>(request);
             _userDal.Add(user);
-            return new SuccessResult();
+            return new SuccessDataResult<User>(user,Messages.Added);
         }
 
         public IDataResult<List<ListUserResponse>> GetAll()

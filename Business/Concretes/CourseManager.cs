@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using Business.Abstracts;
+using Business.BusinessRules;
 using Business.Constants;
 using Business.Requests.Courses;
 using Business.Requests.Users;
@@ -9,6 +10,8 @@ using Business.Responses.Instructors;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.ValidationAspect;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
+using Core.Utilities.Exceptions.BusinessExceptions;
 using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.InMemory;
@@ -27,8 +30,10 @@ namespace Business.Concretes
         ICourseDal _courseDal;
         IMapper _mapper;
         IUserService _userService;
-        public CourseManager(ICourseDal courseDal, IMapper mapper,IUserService userService) //Dependecy Injection
+        CourseBusinessRules _courseBusinessRules;
+        public CourseManager(ICourseDal courseDal, IMapper mapper,IUserService userService, CourseBusinessRules courseBusinessRules) //Dependecy Injection
         {
+            _courseBusinessRules = courseBusinessRules;
             _courseDal = courseDal;
             _mapper = mapper;
             _userService = userService;
@@ -76,43 +81,16 @@ namespace Business.Concretes
 
         public IResult Update(UpdateCourseRequest request)
         {
-            if (CheckIfCourseAlreadyExists(request.CourseName).Success) 
-            {
-                if (CheckIfCourseCategoryExceedsLimit(request.CategoryId).Success)
-                {
-                    Course course = _mapper.Map<Course>(request);
-                    _courseDal.Update(course);
-                    return new SuccessResult(Messages.Updated);
-                }
-                
-            }
 
-            return new ErrorResult();
+            Course course = _mapper.Map<Course>(request);
+            List<Course> list = _courseDal.GetAll();
+            
+
+
+            _courseDal.Update(course);
+            return new SuccessResult(Messages.Updated);
         }
 
-        private IResult CheckIfCourseAlreadyExists(string courseName)
-        {
-            var result = _courseDal.GetAll(c => c.CourseName == courseName).Any();
-            if (result)
-            {
-                return new ErrorResult();
-            }
-            else
-            {
-                return new SuccessResult();
-            }
-        }
-        private IResult CheckIfCourseCategoryExceedsLimit(int categoryId)
-        {
-            var result = _courseDal.GetAll(c => c.CategoryId == categoryId).Count();
-            if (result > 10)
-            {
-                return new ErrorResult();
-            }
-            else
-            {
-                return new SuccessResult();
-            }
-        }
+        
     }
 }
