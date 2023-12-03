@@ -7,6 +7,7 @@ global using Core.Entities;
 global using Entities.Concretes;
 global using Business.Requests;
 global using Business.Responses;
-global using Core.Utilities;
+global using Core.Utilities.Results;
+global using Core.Utilities.Exceptions;
 
 

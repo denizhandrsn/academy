@@ -1,30 +1,20 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using Business.Abstracts;
 using Business.BusinessRules;
 using Business.Constants;
 using Business.Requests.Courses;
 using Business.Requests.Users;
 using Business.Responses.Courses;
-using Business.Responses.Instructors;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.ValidationAspect;
-using Core.CrossCuttingConcerns.Validation;
-using Core.Utilities.Business;
-using Core.Utilities.Exceptions.BusinessExceptions;
-using Core.Utilities.Results;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.InMemory;
-using Entities.Concretes;
 using Entities.DTOs;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.IdentityModel.Tokens;
+using System.Collections.Specialized;
 
 namespace Business.Concretes
 {
-    
+
     public class CourseManager : ICourseService
     {
         ICourseDal _courseDal;
@@ -43,6 +33,7 @@ namespace Business.Concretes
         [ValidationAspect(typeof(CourseValidator))]
         public IResult Add(CreateCourseRequest request)
         {
+            
             CreateUserRequest userRequest = _mapper.Map<CreateUserRequest>(request.CreateUser);
             var user = _userService.Add(userRequest);
             Course course = _mapper.Map<Course>(request);
@@ -81,12 +72,8 @@ namespace Business.Concretes
 
         public IResult Update(UpdateCourseRequest request)
         {
-
+            _courseBusinessRules.CheckIfCourseAlreadyExists(request.CourseName);
             Course course = _mapper.Map<Course>(request);
-            List<Course> list = _courseDal.GetAll();
-            
-
-
             _courseDal.Update(course);
             return new SuccessResult(Messages.Updated);
         }
