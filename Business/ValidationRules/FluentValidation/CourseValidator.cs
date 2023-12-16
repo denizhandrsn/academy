@@ -6,9 +6,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CourseValidator()
         {
-            RuleFor(c => c.CourseName).NotEmpty();
-            RuleFor(c => c.CoursePrice).GreaterThan(0).NotEmpty();
-            RuleFor(c => c.CoursePrice).GreaterThanOrEqualTo(40).When(c => c.CategoryId == 1);
+            RuleFor(c => c.CourseDetail.CourseName).NotEmpty();
+
         }
     }
 }

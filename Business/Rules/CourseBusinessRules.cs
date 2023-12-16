@@ -12,7 +12,7 @@ namespace Business.BusinessRules
         }
         public void CheckIfCourseAlreadyExists(string courseName)
         {
-            var result = _courseDal.GetAll(c => c.CourseName == courseName).Any();
+            var result = _courseDal.GetAll(c => c.CourseDetail.CourseName == courseName).Any();
             if (result)
             {
                 throw new BusinessRuleException();
@@ -21,7 +21,7 @@ namespace Business.BusinessRules
         }
         public void CheckIfCourseCategoryExceedsLimit(int categoryId)
         {
-            var result = _courseDal.GetAll(c => c.CategoryId == categoryId).Count();
+            var result = _courseDal.GetAll(c => c.CourseDetail.CategoryId == categoryId).Count();
             if (result > 10)
             {
                 throw new BusinessRuleException();

@@ -1,7 +1,6 @@
 ﻿using DataAccess.Abstracts;
 using DataAccess.Concretes.AdoNet.Helpers;
 using Entities.Concretes;
-using Entities.DTOs;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -64,10 +63,7 @@ namespace DataAccess.Concretes.AdoNet
             throw new NotImplementedException();
         }
 
-        public List<CourseDetailDto> GetCourseDetails()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Update(Course course)
         {

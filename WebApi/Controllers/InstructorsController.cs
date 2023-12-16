@@ -14,6 +14,15 @@ namespace WebApi.Controllers
         {
             _instructorService = instructorService;
         }
+
+        [HttpGet]
+        public IActionResult Get() 
+        {
+            var result = _instructorService.GetAll();
+            return StatusCode(result.Success ? 200 : 400, result);
+        }
+
+
         [HttpPost]
         public IActionResult Post(CreateInstructorRequest request)
         {

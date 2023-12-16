@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Helpers.GUIDHelpers
 {
-    internal class GuidHelper
+    public class GuidHelper
     {
+        public static string CreateGuid()
+        {
+            return Guid.NewGuid().ToString();
+        }
     }
 }

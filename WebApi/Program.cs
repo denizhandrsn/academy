@@ -1,13 +1,12 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Business.Abstracts;
-using Business.Concretes;
 using Business.DependencyResolvers;
 using Business.DependencyResolvers.Autofac;
 using Business.Profiles;
-using Core.DependencyResolvers;
-using DataAccess.Abstracts;
-using DataAccess.Concretes.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebApi
 {
@@ -22,6 +21,20 @@ namespace WebApi
                     builder.RegisterModule(new AutofacBusinessModule());
                 }
                 );
+
+            var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateLifetime = true,
+                    
+                };
+            });
+
+
 
             // Add services to the container.
             builder.Services.AddBusinessService();

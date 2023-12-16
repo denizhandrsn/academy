@@ -8,7 +8,7 @@ namespace Business.Profiles
     {
         public UserMapperProfiles()
         {
-            CreateMap<CreateUserRequest, User>();
+            CreateMap<CreateUserRequest, User>().ReverseMap();
             CreateMap<User, ListUserResponse>();
         }
     }

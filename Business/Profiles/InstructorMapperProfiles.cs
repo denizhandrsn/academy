@@ -8,7 +8,7 @@ namespace Business.Profiles
     {
         public InstructorMapperProfiles()
         {
-            CreateMap<Instructor, ListInstructorResponses>();
+            CreateMap<Instructor, ListInstructorResponse>();
             CreateMap<CreateInstructorRequest, Instructor>();
         }
     }

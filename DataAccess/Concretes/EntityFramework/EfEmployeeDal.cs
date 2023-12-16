@@ -9,8 +9,5 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfEmployeeDal : EfEntityRepositoryBase<Employee,BootCodeContext>,IEmployeeDal
-    {
 
-    }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Exceptions.ValidatioExceptions
 {
-    internal class NotValidationException
+    public class NotValidationException:ValidationException
     {
+        public NotValidationException() : base("This is not an validation")
+        {
+            
+        }
     }
 }

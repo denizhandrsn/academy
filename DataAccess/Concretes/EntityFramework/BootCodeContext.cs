@@ -20,6 +20,11 @@ namespace DataAccess.Concretes.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Applicant> Applicants { get; set; }
+        public DbSet<CourseDetail> CourseDetails { get; set; }
+        public DbSet<Application> Applications { get; set; }
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
 
     }

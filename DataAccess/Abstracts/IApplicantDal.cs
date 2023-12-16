@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstracts
 {
-    public interface IEmployeeDal:IEntityRepository<Employee>
+    public interface IApplicantDal:IEntityRepository<Applicant>
     {
     }
 }

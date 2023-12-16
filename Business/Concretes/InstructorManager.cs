@@ -3,8 +3,13 @@ using Business.Abstracts;
 using Business.Constants;
 using Business.Requests.Instructors;
 using Business.Requests.Users;
+using Business.Responses.Applicants;
+using Business.Responses.Instructors;
 using Business.Responses.Users;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
+using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes
 {
@@ -25,15 +30,18 @@ namespace Business.Concretes
             CreateUserRequest userRequest = _mapper.Map<CreateUserRequest>(request.userRequest);
             var user = _userService.Add(userRequest);
             Instructor instructor = _mapper.Map<Instructor>(request);
-            instructor.Id = user.Data.Id;
+            instructor.User = _mapper.Map<User>(request.userRequest);//requesti user değişkeni ile değiştir
+            instructor.User.Id = user.Data.Id;
             _instructorDal.Add(instructor);
 
             return new SuccessDataResult<Instructor>(instructor,Messages.Added);
         }
 
-        public IDataResult<List<ListUserResponse>> GetAll()
+        public IDataResult<List<ListInstructorResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            List<Instructor> instructors = _instructorDal.GetAll(include: b => b.Include(b => b.User));
+            List<ListInstructorResponse> responses = _mapper.Map<List<ListInstructorResponse>>(instructors);
+            return new SuccessDataResult<List<ListInstructorResponse>>(responses, Messages.Listed);
         }
     }
 }

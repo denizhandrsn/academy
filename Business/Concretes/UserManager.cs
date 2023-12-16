@@ -18,7 +18,6 @@ namespace Business.Concretes
         }
         public IDataResult<User> Add(CreateUserRequest request)
         {
-
             User user = _mapper.Map<User>(request);
             _userDal.Add(user);
             return new SuccessDataResult<User>(user,Messages.Added);

@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Exceptions.ValidatioExceptions
 {
-    internal class ValidationException
+    public class ValidationException:Exception
     {
+        public ValidationException(string message):base(message)
+        {
+            
+        }
+        public ValidationException() : base("Validation Error")
+        {
+            
+        }
     }
 }

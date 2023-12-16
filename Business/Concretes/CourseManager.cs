@@ -2,13 +2,16 @@
 using Business.Abstracts;
 using Business.BusinessRules;
 using Business.Constants;
+using Business.Requests.CourseDetails;
 using Business.Requests.Courses;
 using Business.Requests.Users;
 using Business.Responses.Courses;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.CachingAspect;
+using Core.Aspects.TransactionAspect;
 using Core.Aspects.ValidationAspect;
 using DataAccess.Abstracts;
-using Entities.DTOs;
+
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
 
@@ -19,26 +22,27 @@ namespace Business.Concretes
     {
         ICourseDal _courseDal;
         IMapper _mapper;
-        IUserService _userService;
+        ICourseDetailService _courseDetailService;
         CourseBusinessRules _courseBusinessRules;
-        public CourseManager(ICourseDal courseDal, IMapper mapper,IUserService userService, CourseBusinessRules courseBusinessRules) //Dependecy Injection
+        public CourseManager(ICourseDal courseDal, IMapper mapper,ICourseDetailService courseDetailService, CourseBusinessRules courseBusinessRules) //Dependecy Injection
         {
             _courseBusinessRules = courseBusinessRules;
             _courseDal = courseDal;
             _mapper = mapper;
-            _userService = userService;
+            _courseDetailService = courseDetailService;
         }
 
 
         [ValidationAspect(typeof(CourseValidator))]
+        [TransactionAspect]
+        [CacheAspect(duration:10)]
         public IResult Add(CreateCourseRequest request)
         {
             
-            CreateUserRequest userRequest = _mapper.Map<CreateUserRequest>(request.CreateUser);
-            var user = _userService.Add(userRequest);
+            CreateCourseDetailRequest courseDetailRequest = _mapper.Map<CreateCourseDetailRequest>(request.CreateCourseDetailRequest);
+            var detail = _courseDetailService.Add(courseDetailRequest);
             Course course = _mapper.Map<Course>(request);
-            course.Id = userRequest.Id;
-
+            course.Id = detail.Data.Id;
             _courseDal.Add(course);
             return new SuccessResult(Messages.Added);
         }
@@ -47,7 +51,9 @@ namespace Business.Concretes
 
         public IDataResult<List<ListCourseResponse>> GetAll()
         {
-            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.Instructor.User).Include(b => b.Category));
+            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.CourseDetail).Include(b => b.Module).Include(b =>
+            b.CourseDetail.Category).Include(b => b.CourseDetail.Instructor).Include(b => b.CourseDetail.Status)
+            );
             List<ListCourseResponse> responses = _mapper.Map<List<ListCourseResponse>>(courses);
 
             return new SuccessDataResult<List<ListCourseResponse>>(responses, Messages.Listed);
@@ -55,24 +61,16 @@ namespace Business.Concretes
 
         public IDataResult<List<Course>> GetAllByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(c => c.CategoryId == categoryId));
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<Course>> GetAllByPriceRange(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(c => c.CoursePrice <= max && c.CoursePrice >= min));
-        }
-
-
-
-        public IDataResult<List<CourseDetailDto>> GetCourseDetails()
-        {
-            return new SuccessDataResult<List<CourseDetailDto>>(_courseDal.GetCourseDetails());
+            throw new NotImplementedException();
         }
 
         public IResult Update(UpdateCourseRequest request)
         {
-            _courseBusinessRules.CheckIfCourseAlreadyExists(request.CourseName);
             Course course = _mapper.Map<Course>(request);
             _courseDal.Update(course);
             return new SuccessResult(Messages.Updated);

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.IoC
+namespace Business.Requests.Statuses
 {
-    internal interface ICoreModule
+    public class CreateStatusRequest
     {
+        public string Name { get; set; }
     }
 }
