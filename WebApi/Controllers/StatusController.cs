@@ -1,9 +1,6 @@
 ﻿using Business.Abstracts;
-using Business.Concretes;
 using Business.Requests.Applicants;
-using Business.Requests.Courses;
-using DataAccess.Concretes.EntityFramework;
-using Entities.Concretes;
+using Business.Requests.Statuses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,38 +8,39 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class StatusController : ControllerBase
     {
-        ICourseService _courseService;
-        public CoursesController(ICourseService courseService)
+        IStatusService _statusService;
+        public StatusController(IStatusService statusService)
         {
-            _courseService = courseService;
+            _statusService = statusService;
         }
-
         [HttpGet("getall")]
         public IActionResult Get()
         {
-            var result = _courseService.GetAll();
+            var result = _statusService.GetAll();
             return StatusCode(result.Success ? 200 : 400, result);
         }
         [HttpPost("add")]
-        public IActionResult Post(CreateCourseRequest request)
+        public IActionResult Post(CreateStatusRequest request)
         {
-            var result = _courseService.Add(request);
+            var result = _statusService.Add(request);
             return StatusCode(result.Success ? 200 : 400, result);
         }
         [HttpDelete("delete")]
-        public IActionResult Delete(DeleteCourseRequest request)
+        public IActionResult Delete(DeleteStatusRequest request)
         {
-            var result = _courseService.Delete(request);
+            var result = _statusService.Delete(request);
             return StatusCode(result.Success ? 200 : 400, result);
         }
         [HttpPut("update")]
-        public IActionResult Update(UpdateCourseRequest request)
+        public IActionResult Update(UpdateStatusRequest request)
         {
-            var result = _courseService.Update(request);
+            var result = _statusService.Update(request);
             return StatusCode(result.Success ? 200 : 400, result);
         }
+
+
 
     }
 }

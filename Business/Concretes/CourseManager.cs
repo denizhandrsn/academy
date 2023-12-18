@@ -47,6 +47,13 @@ namespace Business.Concretes
             return new SuccessResult(Messages.Added);
         }
 
+        public IResult Delete(DeleteCourseRequest request)
+        {
+            Course course = _mapper.Map<Course>(request);
+            _courseDal.Delete(course);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListCourseResponse>> GetAll()
         {
             List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.CourseDetail).Include(b =>

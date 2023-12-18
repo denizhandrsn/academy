@@ -17,6 +17,8 @@ namespace Business.Profiles
             CreateMap<CreateModuleRequest, Module>().ReverseMap();
             CreateMap<Module, ListModuleResponse>().ReverseMap();
             CreateMap<List<ListCourseResponse>, ListModuleResponse>();
+            CreateMap<DeleteModuleRequest, Module>().ReverseMap();
+            CreateMap<UpdateModuleRequest, Module>().ReverseMap();
         }
     }
 }

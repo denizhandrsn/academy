@@ -9,5 +9,6 @@
         public static string Discounted = "İndirimli liste";
         public static string Maintanance = "Sistem Bakımda";
         public static string Updated = "Başarılı Güncelleme";
+        public static string Deleted = "Başarı ile silindi";
     }
 }

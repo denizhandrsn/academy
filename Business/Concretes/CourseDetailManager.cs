@@ -31,6 +31,13 @@ namespace Business.Concretes
             return new SuccessDataResult<CourseDetail>(courseDetail);
         }
 
+        public IResult Delete(DeleteCourseDetailRequest request)
+        {
+            CourseDetail courseDetail = _mapper.Map<CourseDetail>(request);
+            _courseDetailDal.Delete(courseDetail);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListCourseDetailResponse>> GetAll()
         {
             List<CourseDetail> courseDetails = _courseDetailDal.GetAll(include: b => b.Include(b => b.Instructor).Include(b => b.Category)
@@ -39,6 +46,13 @@ namespace Business.Concretes
             List<ListCourseDetailResponse> responses = _mapper.Map<List<ListCourseDetailResponse>>(courseDetails);
             return new SuccessDataResult<List<ListCourseDetailResponse>>(responses, Messages.Listed);
 
+        }
+
+        public IResult Update(UpdateCourseDetailRequest request)
+        {
+            CourseDetail courseDetail = _mapper.Map<CourseDetail>(request);
+            _courseDetailDal.Update(courseDetail);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

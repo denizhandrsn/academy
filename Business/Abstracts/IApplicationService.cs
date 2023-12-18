@@ -14,5 +14,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListApplicationResponse>> GetAll();
         IResult Add(CreateApplicationRequest request);
+        IResult Update(UpdateApplicationRequest request);
+        IResult Delete(DeleteApplicationRequest request);
     }
 }

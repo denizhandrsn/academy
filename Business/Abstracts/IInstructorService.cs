@@ -1,4 +1,5 @@
-﻿using Business.Requests.Instructors;
+﻿using Business.Requests.Courses;
+using Business.Requests.Instructors;
 using Business.Responses.Instructors;
 using Business.Responses.Users;
 
@@ -8,5 +9,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListInstructorResponse>> GetAll();
         IDataResult<Instructor> Add(CreateInstructorRequest request);
+        IResult Update(UpdateInstructorRequest request);
+        IResult Delete(DeleteInstructorRequest request);
     }
 }

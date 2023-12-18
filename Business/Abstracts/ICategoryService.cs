@@ -14,5 +14,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListCategoryResponse>> GetAll();
         IResult Add(CreateCategoryRequest request);
+        IResult Update(UpdateCategoryRequest request);
+        IResult Delete(DeleteCategoryRequest request);
     }
 }

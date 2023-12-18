@@ -1,4 +1,5 @@
-﻿using Business.Requests.Users;
+﻿using Business.Requests.Courses;
+using Business.Requests.Users;
 using Business.Responses.Users;
 
 namespace Business.Abstracts
@@ -7,7 +8,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListUserResponse>> GetAll();
         IDataResult<User> Add(CreateUserRequest request);
-        
-
+        IResult Update(UpdateUserRequest request);
+        IResult Delete(DeleteUserRequest request);
     }
 }

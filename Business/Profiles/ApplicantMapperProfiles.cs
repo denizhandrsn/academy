@@ -15,6 +15,8 @@ namespace Business.Profiles
         {
             CreateMap<Applicant,ListApplicantResponse>();
             CreateMap<CreateApplicantRequest, Applicant>();
+            CreateMap<DeleteApplicantRequest, Applicant>();
+            CreateMap<UpdateApplicantRequest, Applicant>();
         }
     }
 }

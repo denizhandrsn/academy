@@ -20,13 +20,11 @@ namespace Business.Concretes
     {
         IModuleDal _moduleDal;
         IMapper _mapper;
-        ICourseService _courseService;
 
-        public ModuleManager(IModuleDal moduleDal, IMapper mapper, ICourseService courseService)
+        public ModuleManager(IModuleDal moduleDal, IMapper mapper)
         {
             _moduleDal = moduleDal;
             _mapper = mapper;
-            _courseService = courseService;
         }
 
         public IResult Add(CreateModuleRequest request)
@@ -34,6 +32,13 @@ namespace Business.Concretes
             var module = _mapper.Map<Module>(request);
             _moduleDal.Add(module);
             return new SuccessDataResult<Module>(module,Messages.Added);
+        }
+
+        public IResult Delete(DeleteModuleRequest request)
+        {
+            Module module = _mapper.Map<Module>(request);
+            _moduleDal.Delete(module);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<ListModuleResponse>> GetAll()
@@ -44,6 +49,13 @@ namespace Business.Concretes
             List<ListModuleResponse> responses = _mapper.Map<List<ListModuleResponse>>(modules);
             
             return new SuccessDataResult<List<ListModuleResponse>>(responses, Messages.Listed);
+        }
+
+        public IResult Update(UpdateModuleRequest request)
+        {
+            Module module = _mapper.Map<Module>(request);
+            _moduleDal.Update(module);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

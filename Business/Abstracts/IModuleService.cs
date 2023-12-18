@@ -14,6 +14,7 @@ namespace Business.Abstracts
     {
         IDataResult<List<ListModuleResponse>> GetAll();
         IResult Add(CreateModuleRequest request);
-        
+        IResult Update(UpdateModuleRequest request);
+        IResult Delete(DeleteModuleRequest request);
     }
 }

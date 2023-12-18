@@ -9,5 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-
+    public class EfStatusDal:EfEntityRepositoryBase<Status,BootCodeContext>,IStatusDal
+    {
+    }
 }

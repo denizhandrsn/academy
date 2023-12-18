@@ -10,6 +10,9 @@ namespace Business.Profiles
         {
             CreateMap<Instructor, ListInstructorResponse>();
             CreateMap<CreateInstructorRequest, Instructor>();
+            CreateMap<UpdateInstructorRequest, Instructor>();
+            CreateMap<DeleteInstructorRequest, Instructor>();
+
         }
     }
 }

@@ -35,6 +35,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
+            builder.RegisterType<StatusManager>().As<IStatusService>().SingleInstance();
+            builder.RegisterType<EfStatusDal>().As<IStatusDal>().SingleInstance();
+
+            builder.RegisterType<ApplicationManager>().As<IApplicationService>().SingleInstance();
+            builder.RegisterType<EfApplicationDal>().As<IApplicationDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -10,6 +10,8 @@ namespace Business.Profiles
         {
             CreateMap<CreateUserRequest, User>().ReverseMap();
             CreateMap<User, ListUserResponse>();
+            CreateMap<DeleteUserRequest, User>().ReverseMap();
+            CreateMap<UpdateUserRequest, User>().ReverseMap();
         }
     }
 }

@@ -39,11 +39,28 @@ namespace Business.Concretes
 
         }
 
+        public IResult Delete(DeleteApplicantRequest request)
+        {
+            Applicant applicant = _mapper.Map<Applicant>(request);
+            _applicantDal.Delete(applicant);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListApplicantResponse>> GetAll()
         {
             List<Applicant> applicants = _applicantDal.GetAll(include: b => b.Include(b => b.User));
             List<ListApplicantResponse> responses = _mapper.Map<List<ListApplicantResponse>>(applicants);
             return new SuccessDataResult<List<ListApplicantResponse>>(responses,Messages.Listed);
+        }
+
+        public IResult Update(UpdateApplicantRequest request)
+        {
+            UpdateUserRequest userRequest = _mapper.Map<UpdateUserRequest>(request.UserRequest);
+            var user = _userService.Update(userRequest);
+            Applicant applicant = _mapper.Map<Applicant>(request);
+            applicant.User = _mapper.Map<User>(userRequest);
+            _applicantDal.Update(applicant);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

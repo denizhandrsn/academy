@@ -13,8 +13,10 @@ namespace Business.Profiles
     {
         public CourseDetailMapperProfiles()
         {
-            CreateMap<CreateCourseDetailRequest, CourseDetail>();
             CreateMap<CourseDetail, ListCourseDetailResponse>();
+            CreateMap<CreateCourseDetailRequest, CourseDetail>();
+            CreateMap<UpdateCourseDetailRequest, CourseDetail>();
+            CreateMap<DeleteCourseDetailRequest, CourseDetail>();
         }
     }
 }

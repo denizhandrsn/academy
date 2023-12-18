@@ -23,13 +23,25 @@ namespace Business.Concretes
             return new SuccessDataResult<User>(user,Messages.Added);
         }
 
+        public IResult Delete(DeleteUserRequest request)
+        {
+            User user = _mapper.Map<User>(request);
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListUserResponse>> GetAll()
         {
-            
-
             List<User> users = _userDal.GetAll();
             List<ListUserResponse> responses = _mapper.Map<List<ListUserResponse>>(users);
             return new SuccessDataResult<List<ListUserResponse>>(responses);
+        }
+
+        public IResult Update(UpdateUserRequest request)
+        {
+            User user = _mapper.Map<User>(request);
+            _userDal.Update(user);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

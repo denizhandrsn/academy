@@ -30,11 +30,25 @@ namespace Business.Concretes
             return new SuccessResult(Messages.Added);
         }
 
+        public IResult Delete(DeleteCategoryRequest request)
+        {
+            Category category = _mapper.Map<Category>(request);
+            _categoryDal.Delete(category);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListCategoryResponse>> GetAll()
         {
             List<Category> categories = _categoryDal.GetAll();
             List<ListCategoryResponse> response = _mapper.Map<List<ListCategoryResponse>>(categories);
             return new SuccessDataResult<List<ListCategoryResponse>>(response,Messages.Listed);
+        }
+
+        public IResult Update(UpdateCategoryRequest request)
+        {
+            Category category = _mapper.Map<Category>(request);
+            _categoryDal.Update(category);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

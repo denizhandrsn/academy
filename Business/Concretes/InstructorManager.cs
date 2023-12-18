@@ -37,11 +37,30 @@ namespace Business.Concretes
             return new SuccessDataResult<Instructor>(instructor,Messages.Added);
         }
 
+        public IResult Delete(DeleteInstructorRequest request)
+        {
+            Instructor instructor = _mapper.Map<Instructor>(request);
+            DeleteUserRequest userRequest = _mapper.Map<DeleteUserRequest>(request.userRequest);
+            _userService.Delete(userRequest);
+            _instructorDal.Delete(instructor);
+            return new SuccessResult(Messages.Deleted);
+        }
+
         public IDataResult<List<ListInstructorResponse>> GetAll()
         {
             List<Instructor> instructors = _instructorDal.GetAll(include: b => b.Include(b => b.User));
             List<ListInstructorResponse> responses = _mapper.Map<List<ListInstructorResponse>>(instructors);
             return new SuccessDataResult<List<ListInstructorResponse>>(responses, Messages.Listed);
+        }
+
+        public IResult Update(UpdateInstructorRequest request)
+        {
+            UpdateUserRequest userRequest = _mapper.Map<UpdateUserRequest>(request.userRequest);
+            _userService.Update(userRequest);
+            Instructor instructor = _mapper.Map<Instructor>(request);
+            _instructorDal.Update(instructor);
+            return new SuccessResult(Messages.Updated);
+            
         }
     }
 }

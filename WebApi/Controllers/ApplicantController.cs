@@ -27,5 +27,17 @@ namespace WebApi.Controllers
             var result = _applicantService.Add(request);
             return StatusCode(result.Success ? 200 : 400, result);
         }
+        [HttpDelete("delete")]
+        public IActionResult Delete(DeleteApplicantRequest request)
+        {
+            var result = _applicantService.Delete(request);
+            return StatusCode(result.Success ? 200 : 400, result);
+        }
+        [HttpPut("update")]
+        public IActionResult Update(UpdateApplicantRequest request)
+        {
+            var result = _applicantService.Update(request);
+            return StatusCode(result.Success ? 200 : 400, result);
+        }
     }
 }
