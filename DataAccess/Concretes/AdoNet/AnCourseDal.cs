@@ -41,6 +41,11 @@ namespace DataAccess.Concretes.AdoNet
             throw new NotImplementedException();
         }
 
+        public Course? Get(Expression<Func<Course, bool>> predicate, Func<IQueryable<Course>, IIncludableQueryable<Course, object>> include = null, bool enableTracking = true)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Course> GetAll()
         {
             List<Course> list = DbHelper.CreateReadCommand<Course>("Select * from Courses");

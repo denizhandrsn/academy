@@ -11,7 +11,8 @@ drop table Applicants
 drop table Applications
 
 create table Module(
-Id int primary key identity(1,1)
+Id int primary key identity(1,1),
+Name varchar(250)
 )
 
 create table Users(
@@ -46,9 +47,20 @@ Id int primary key identity(1,1),
 Name varchar(50)
 )
 
+create table CourseDetails(
+Id int primary key identity(1,1),
+CategoryId int foreign key references Categories(Id),
+InstructorId int foreign key references Instructors(Id),
+StatusId int foreign key references Statuses(Id),
+Description varchar(250),
+Image varchar(250),
+CourseName varchar(250)
+)
+
 create table Courses(
 Id int primary key identity(1,1),
 ModuleId int foreign key references Module(Id),
+CourseDetailId int foreign key references CourseDetails(Id)
 )
 
 create table Applications(
@@ -60,13 +72,7 @@ StatusId int foreign key references Statuses(Id)
 
 
 
-create table CourseDetails(
-Id int primary key identity(1,1) references Courses(Id),
-CategoryId int foreign key references Categories(Id),
-InstructorId int foreign key references Instructors(Id),
-StatusId int foreign key references Statuses(Id),
-Description varchar(250),
-Image varchar(250),
-CourseName varchar(250)
-)
+set IDENTITY_INSERT Courses On
+
+
 

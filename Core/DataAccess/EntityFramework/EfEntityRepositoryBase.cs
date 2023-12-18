@@ -37,11 +37,16 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> predicate,
+               Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+               bool enableTracking = true)
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+                IQueryable<TEntity> queryable = context.Set<TEntity>();
+                if (!enableTracking) queryable.AsNoTracking();
+                if (include is not null) queryable = include(queryable);
+                return queryable.SingleOrDefault(predicate);
             }
         }
 

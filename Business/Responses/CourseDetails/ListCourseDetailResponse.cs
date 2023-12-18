@@ -8,7 +8,6 @@ namespace Business.Responses.CourseDetails
 {
     public class ListCourseDetailResponse
     {
-        public int Id { get; set; }
         public string CategoryName { get; set; }
         public string InstructorUserFirstName { get; set; }
         public string InstructorUserLastName { get; set; }

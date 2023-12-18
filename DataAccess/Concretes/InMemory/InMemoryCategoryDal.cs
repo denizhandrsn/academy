@@ -37,6 +37,11 @@ namespace DataAccess.Concretes.InMemory
             throw new NotImplementedException();
         }
 
+        public Category? Get(Expression<Func<Category, bool>> predicate, Func<IQueryable<Category>, IIncludableQueryable<Category, object>> include = null, bool enableTracking = true)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Category> GetAll(Expression<Func<Category, bool>> filter = null)
         {
             throw new NotImplementedException();

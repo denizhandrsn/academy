@@ -27,6 +27,7 @@ namespace Business.Concretes
         public IDataResult<CourseDetail> Add(CreateCourseDetailRequest request)
         {
             CourseDetail courseDetail = _mapper.Map<CourseDetail>(request);
+            _courseDetailDal.Add(courseDetail);
             return new SuccessDataResult<CourseDetail>(courseDetail);
         }
 

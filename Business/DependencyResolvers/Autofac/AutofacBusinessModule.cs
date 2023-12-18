@@ -29,6 +29,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CourseDetailManager>().As<ICourseDetailService>().SingleInstance();
             builder.RegisterType<EfCourseDetailDal>().As<ICourseDetailDal>().SingleInstance();
 
+            builder.RegisterType<ModuleManager>().As<IModuleService>().SingleInstance();
+            builder.RegisterType<EfModuleDal>().As<IModuleDal>().SingleInstance();
+
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

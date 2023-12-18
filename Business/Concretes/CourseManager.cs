@@ -13,6 +13,7 @@ using Core.Aspects.ValidationAspect;
 using DataAccess.Abstracts;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Collections.Specialized;
 
 namespace Business.Concretes
@@ -23,10 +24,10 @@ namespace Business.Concretes
         ICourseDal _courseDal;
         IMapper _mapper;
         ICourseDetailService _courseDetailService;
-        CourseBusinessRules _courseBusinessRules;
-        public CourseManager(ICourseDal courseDal, IMapper mapper,ICourseDetailService courseDetailService, CourseBusinessRules courseBusinessRules) //Dependecy Injection
+        
+        public CourseManager(ICourseDal courseDal, IMapper mapper,ICourseDetailService courseDetailService) //Dependecy Injection
         {
-            _courseBusinessRules = courseBusinessRules;
+            
             _courseDal = courseDal;
             _mapper = mapper;
             _courseDetailService = courseDetailService;
@@ -35,24 +36,22 @@ namespace Business.Concretes
 
         [ValidationAspect(typeof(CourseValidator))]
         [TransactionAspect]
-        [CacheAspect(duration:10)]
         public IResult Add(CreateCourseRequest request)
         {
-            
             CreateCourseDetailRequest courseDetailRequest = _mapper.Map<CreateCourseDetailRequest>(request.CreateCourseDetailRequest);
             var detail = _courseDetailService.Add(courseDetailRequest);
             Course course = _mapper.Map<Course>(request);
-            course.Id = detail.Data.Id;
+            //Course detiali course mapliycez
+            course.CourseDetail = detail.Data;
             _courseDal.Add(course);
             return new SuccessResult(Messages.Added);
         }
 
-        
-
         public IDataResult<List<ListCourseResponse>> GetAll()
         {
-            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.CourseDetail).Include(b => b.Module).Include(b =>
+            List<Course> courses = _courseDal.GetAll(include: b => b.Include(b => b.CourseDetail).Include(b =>
             b.CourseDetail.Category).Include(b => b.CourseDetail.Instructor).Include(b => b.CourseDetail.Status)
+            .Include(b => b.CourseDetail.Instructor.User)
             );
             List<ListCourseResponse> responses = _mapper.Map<List<ListCourseResponse>>(courses);
 
@@ -68,6 +67,8 @@ namespace Business.Concretes
         {
             throw new NotImplementedException();
         }
+
+      
 
         public IResult Update(UpdateCourseRequest request)
         {

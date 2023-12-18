@@ -13,7 +13,9 @@ namespace DataAccess.Abstracts
     {
         List<T> GetAll(Expression<Func<T, bool>>? predicate = null,
                               Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null, bool enableTracking = true);
-        T Get(Expression<Func<T,bool>> filter);
+        T? Get(Expression<Func<T, bool>> predicate,
+               Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+               bool enableTracking = true);
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);

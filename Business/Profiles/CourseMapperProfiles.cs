@@ -10,7 +10,8 @@ namespace Business.Profiles
         {
             CreateMap<CreateCourseRequest, Course>();
             CreateMap<Course, GetCourseResponse>();
-            CreateMap<Course, ListCourseResponse>();
+            CreateMap<Course, ListCourseResponse>().ReverseMap();
+            CreateMap<List<Course>,ListCourseResponse>().ReverseMap();
             
             
         }

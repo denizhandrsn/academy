@@ -11,6 +11,5 @@ namespace Business.Abstracts
         IResult Update(UpdateCourseRequest request);
         IDataResult<List<Course>> GetAllByCategory(int categoryId);
         IDataResult<List<Course>> GetAllByPriceRange(decimal min,decimal max);
-
     }
 }

@@ -13,6 +13,6 @@ namespace Entities.Concretes
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection Courses { get; set; }
+        public Course Course { get; set; }
     }
 }

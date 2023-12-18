@@ -14,6 +14,6 @@ namespace Entities.Concretes
         public int ModuleId { get; set; }
 
         public virtual CourseDetail CourseDetail { get; set; }
-        public virtual Module Module { get; set; }
+ 
     }
 }
