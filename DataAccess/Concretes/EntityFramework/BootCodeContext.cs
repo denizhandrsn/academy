@@ -1,4 +1,5 @@
-﻿using Entities.Concretes;
+﻿using Core.Entities.Concretes;
+using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,9 @@ namespace DataAccess.Concretes.EntityFramework
         public DbSet<Application> Applications { get; set; }
         public DbSet<Module> Module { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
 
 
     }

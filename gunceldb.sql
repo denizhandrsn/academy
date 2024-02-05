@@ -70,6 +70,18 @@ CourseId int foreign key references Courses(Id),
 StatusId int foreign key references Statuses(Id)
 )
 
+create table OperationClaims(
+Id int primary key identity(1,1),
+Name varchar(250)
+)
+create table UserOperationClaims(
+Id int primary key identity(1,1),
+OperationClaimId int foreign key references OperationClaims(Id),
+UserId int foreign key references Users(Id)
+)
+
+
+
 
 
 set IDENTITY_INSERT Courses On

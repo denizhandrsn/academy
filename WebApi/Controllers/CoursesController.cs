@@ -25,6 +25,11 @@ namespace WebApi.Controllers
             var result = _courseService.GetAll();
             return StatusCode(result.Success ? 200 : 400, result);
         }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id) 
+        { 
+            var result = _courseService.get
+        }
         [HttpPost("add")]
         public IActionResult Post(CreateCourseRequest request)
         {

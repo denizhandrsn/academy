@@ -5,13 +5,8 @@ using Business.Requests.CourseDetails;
 using Business.Responses.CourseDetails;
 using DataAccess.Abstracts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Business.Concretes 
+namespace Business.Concretes
 {
     public class CourseDetailManager : ICourseDetailService
     {

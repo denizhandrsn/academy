@@ -65,17 +65,28 @@ namespace Business.Concretes
             return new SuccessDataResult<List<ListCourseResponse>>(responses, Messages.Listed);
         }
 
-        public IDataResult<List<Course>> GetAllByCategory(int categoryId)
+        public IDataResult<List<ListCourseResponse>> GetAllByCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            List<Course> course = _courseDal.GetAll(predicate: b=> b.CourseDetail.CategoryId == categoryId, include:
+                b => b.Include(b => b.CourseDetail).Include(b => b.CourseDetail.Category)
+                .Include(b => b.CourseDetail.Status).Include(b => b.CourseDetail.Instructor)
+                .Include(b => b.CourseDetail.Instructor.User));
+            List<ListCourseResponse> responses = _mapper.Map<List<ListCourseResponse>>(course);
+            return new SuccessDataResult<List<ListCourseResponse>>(responses,Messages.Listed);
+
         }
 
-        public IDataResult<List<Course>> GetAllByPriceRange(decimal min, decimal max)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-      
+        public IDataResult<GetCourseResponse> GetById(GetCourseRequest request)
+        {
+            Course course = _courseDal.Get(predicate: b => b.Id == request.Id, include: b=> b.Include(b => b.CourseDetail)
+            .Include(b => b.CourseDetail.Category).Include(b => b.CourseDetail.Instructor).Include(b => b.CourseDetail.Status)
+            .Include(b => b.CourseDetail.Instructor.User));
+            GetCourseResponse response = _mapper.Map<GetCourseResponse>(course);
+            return new SuccessDataResult<GetCourseResponse>(response, Messages.Getted);
+            
+        }
 
         public IResult Update(UpdateCourseRequest request)
         {

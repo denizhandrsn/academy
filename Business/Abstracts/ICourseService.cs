@@ -10,7 +10,7 @@ namespace Business.Abstracts
         IResult Add(CreateCourseRequest request);
         IResult Update(UpdateCourseRequest request);
         IResult Delete(DeleteCourseRequest request);
-        IDataResult<List<Course>> GetAllByCategory(int categoryId);
-        IDataResult<List<Course>> GetAllByPriceRange(decimal min,decimal max);
+        IDataResult<GetCourseResponse> GetById(GetCourseRequest request);
+        IDataResult<List<ListCourseResponse>> GetAllByCategory(int categoryId);
     }
 }

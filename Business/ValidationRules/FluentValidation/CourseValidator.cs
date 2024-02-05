@@ -7,7 +7,6 @@ namespace Business.ValidationRules.FluentValidation
         public CourseValidator()
         {
             RuleFor(c => c.CourseDetail.CourseName).NotEmpty();
-
         }
     }
 }

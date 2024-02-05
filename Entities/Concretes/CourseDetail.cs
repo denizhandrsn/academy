@@ -17,6 +17,7 @@ namespace Entities.Concretes
         public string? Image { get; set; }
         public string CourseName { get; set; }
 
+
         public virtual Category Category { get; set; }
         public virtual Instructor Instructor { get; set; }
         public virtual Status Status { get; set; }
