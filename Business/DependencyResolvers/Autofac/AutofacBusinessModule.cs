@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstracts;
 using Business.Concretes;
 using Castle.DynamicProxy;
+using Core.Services.Mailing;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
@@ -43,6 +44,8 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
             builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>().SingleInstance();
+
+            builder.RegisterType<EmailService>().As<IEmailService>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

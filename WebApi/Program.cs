@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Core.Services.Mailing;
 
 namespace WebApi
 {
@@ -39,7 +40,7 @@ namespace WebApi
             // Add services to the container.
             builder.Services.AddBusinessService();
             builder.Services.AddAutoMapper(typeof(CourseMapperProfiles) /*, ...*/);
-            
+            builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
